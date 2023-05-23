@@ -1,17 +1,22 @@
 pipeline {
-agent any
+    agent any
 
-stages {
-stage('Clean') {
-steps {
-sh 'mvn clean'
-script {
-if (currentBuild.result == 'SUCCESS') {
-env.BUILD_STAGE1_STATUS = 'SUCCESS'
-} else {
-env.BUILD_STAGE1_STATUS = 'FAILURE'
-}
-}
+    tools { 
+        maven 'Maven 3.9.2' 
+        jdk 'jdk8' 
+    }
+
+    stages {
+        stage('Clean') {
+        steps {
+        sh 'mvn clean'
+        script {
+        if (currentBuild.result == 'SUCCESS') {
+        env.BUILD_STAGE1_STATUS = 'SUCCESS'
+        } else {
+        env.BUILD_STAGE1_STATUS = 'FAILURE'
+        }
+    }
 }
 }
 
